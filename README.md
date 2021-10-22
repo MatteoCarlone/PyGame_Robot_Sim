@@ -15,7 +15,7 @@ The aim of the project is to make a holonomic robot move inside an maze without 
 
 #### Silver Token 
 
-![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/silver_token.png)
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/token_silver.png)
 
 #### Gold Box
 
