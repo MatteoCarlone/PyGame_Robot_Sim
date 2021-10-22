@@ -1,7 +1,8 @@
 
-# First Assignment 
-## Python Robotics Simulator , Class of Research Track : Robotics Engineering 
-### Univeristy of Genoa 
+# Python Robotics Simulator  
+## First Assignment of the course [`Research Track`](https://unige.it/en/off.f/2021/ins/51201.html?codcla=10635) , [`Robotics Engineering`](https://courses.unige.it/10635). 
+###  Professor. [Carmine Ricchiuto](https://github.com/CarmineD8).
+ 
 
 -----------------------
 
