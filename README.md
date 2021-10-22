@@ -7,16 +7,36 @@
 
 This is a simple, portable robot simulator developed by [Student Robotics](https://studentrobotics.org).
 
-The aim of the project is to make a holonomic robot move inside an maze without hitting walls made of golden boxes. Furthermore, inside the maze there are many silver tokens that the robot must grab, move them behind him and then start again with the search for the next tokens.
+The aim of the project is to make a holonomic robot move inside an maze without hitting walls made of golden boxes. Furthermore, inside the maze there are many silver tokens that the robot must grab, move them behind him and then start again with the search for the next tokens. 
 
+#### Holonomic Robot
 
-Technologies i used .....
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/robot.png)
 
-Challenges i faced ....
+#### Silver Token 
 
-What did a learned ....
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/silver_token.png)
 
-Features .....
+#### Gold Box
+
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/token.png)
+
+#### Map 
+
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/map.png)
+
+The main difficulties I faced in this project were three:
+
+* make the robot move on the map always in the correct direction (in my case counterclockwise)
+
+* avoid walls (golden boxes)
+
+* detect the silver tokens in order to grab them by paying attention to any gold boxes in between
+
+The robot is able to do this thanks to two motors parallel to each other and the ability to see around itself and recognize in particular golden boxes and silver tokens. Its vision can also be limited by seeing only in some directions rather than others at different distances.
+
+This project helped me to improve my knowledge of python especially in managing and creating multiple functions at the same time. It was also a first approach to the world of robotics in preparation for the study and use of ROS (Robot-Operating-Systems) which  is a set of software libraries and tools that help build robot applications.
+
 
 Installing and running
 -----------------------
