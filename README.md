@@ -2,12 +2,22 @@
 # Python Robotics Simulator  <img src="https://media4.giphy.com/media/dWlLf9EAC8u5Nd0ku4/giphy.gif?cid=ecf05e479junsdcbh0eayqrrx90l4oo4lj83zpqi9yrught2&rid=giphy.gif&ct=s" width="50"></h2>
 ## First Assignment of the course [Research_Track_1](https://unige.it/en/off.f/2021/ins/51201.html?codcla=10635) , [Robotics Engineering](https://courses.unige.it/10635). 
 ###  Professor. [Carmine Ricchiuto](https://github.com/CarmineD8).
- 
 
 -----------------------
 
 This is a simple, portable robot simulator developed by [Student Robotics](https://studentrobotics.org).
-Some of the arenas and the exercises have been modified for the Research Track I course
+
+The aim of the project is to make a holonomic robot move inside an maze without hitting walls made of golden boxes. Furthermore, inside the maze there are many silver tokens that the robot must grab, move them behind him and then start again with the search for the next tokens.
+
+![alt text](https://github.com/[MatteoCarlone]/[my_Research_Track]/blob/[main]/robot.png?raw=true)
+
+Technologies i used .....
+
+Challenges i faced ....
+
+What did a learned ....
+
+Features .....
 
 Installing and running
 -----------------------
@@ -36,14 +46,9 @@ The instruction for the three exercises can be found inside the .py files (exerc
 When done, you can run the program with:
 
 ```bash
-$ python run.py exercise1.py
+$ python run.py assignment.py
 ```
 
-You have also the solutions of the exercises (folder solutions)
-
-```bash
-$ python run.py solutions/exercise1_solution.py
-```
 
 Robot API
 ---------
@@ -60,6 +65,8 @@ The Motor Board API is identical to [that of the SR API](https://studentrobotics
 R.motors[0].m0.power = 25
 R.motors[0].m1.power = -25
 ```
+Features
+---------
 
 ### The Grabber ###
 
