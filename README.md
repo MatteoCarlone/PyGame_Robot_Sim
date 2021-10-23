@@ -38,7 +38,7 @@ The robot is able to do this thanks to two motors parallel to each other and the
 This project helped me to improve my knowledge of python especially in managing and creating multiple functions at the same time. It was also a first approach to the world of robotics in preparation for the study and use of ROS (Robot-Operating-Systems) which  is a set of software libraries and tools that help build robot applications.
 
 
-Installing and running
+Installing and running <img src="https://media3.giphy.com/media/LwBuVHh34nnCPWRSzB/giphy.gif?cid=ecf05e47t4j9mb7l8j1vzdc76i2453rexlnv7iye9d4wfdep&rid=giphy.gif&ct=s" width="50"></h2>
 -----------------------
 
 The simulator requires a Python 2.7 installation, the [pygame](http://pygame.org/) library, [PyPyBox2D](https://pypi.python.org/pypi/pypybox2d/2.1-r331), and [PyYAML](https://pypi.python.org/pypi/PyYAML/).
@@ -53,7 +53,7 @@ $ python run.py assignment.py
 
 ```
 
-## Troubleshooting
+## Troubleshooting <img src="https://media2.giphy.com/media/KCdmz8COxVGcX7xpbh/giphy.gif?cid=ecf05e47h0zkw0ia3zhgi1v6rez699foch8z39mb8lgzwka6&rid=giphy.gif&ct=s" width="50"></h2>
 
 When running `python run.py <file>`, you may be presented with an error: `ImportError: No module named 'robot'`. This may be due to a conflict between sr.tools and sr.robot. To resolve, symlink simulator/sr/robot to the location of sr.tools.
 
@@ -135,7 +135,7 @@ for m in markers:
 A function called `Rotation()` has been implemented to move the robot counterclockwise and to follow the maze without ever going back. 
 When the robot is close to the wall it calculates (using the `R.see()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30 ° (between 75 ° and 105 ° for his right and between -105 ° and -75 ° for his left).
 
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpeg" width="684" height="371">
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpeg" width="649" height="355.5">
 
 The Robot will rotate towards the furthest golden box until it no longer sees any golden box in a 90 ° cone at a distance of 1 in front of it.
 
