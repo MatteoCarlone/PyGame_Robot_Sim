@@ -7,7 +7,7 @@
 
 This is a simple, portable robot simulator developed by [Student Robotics](https://studentrobotics.org).
 
-The aim of the project is to make a holonomic robot move inside an maze without hitting walls made of golden boxes. Furthermore, inside the maze there are many silver tokens that the robot must grab, move them behind him and then start again with the search for the next tokens. 
+The project aims to make a holonomic robot move inside a maze without hitting walls made of golden boxes. Furthermore, inside the maze, there are many silver tokens that the robot have to grab, move them behind him and then start again with the search for the next tokens. 
 
 #### Holonomic Robot
 
@@ -33,7 +33,7 @@ The main difficulties I faced in this project were three:
 
 * detect the silver tokens in order to grab them by paying attention to any gold boxes in between
 
-The robot is able to do this thanks to two motors parallel to each other and the ability to see around itself and recognize in particular golden boxes and silver tokens. Its vision can also be limited by seeing only in some directions rather than others at different distances.
+The robot is able to do this thanks to two motors parallel to each other and the ability to see around itself and recognize in particular golden boxes and silver tokens. Its vision can also be limited to see only in some directions rather than others at different distances.
 
 This project helped me to improve my knowledge of python especially in managing and creating multiple functions at the same time. It was also a first approach to the world of robotics in preparation for the study and use of ROS (Robot-Operating-Systems) which  is a set of software libraries and tools that help build robot applications.
 
@@ -45,6 +45,14 @@ The simulator requires a Python 2.7 installation, the [pygame](http://pygame.org
 
 Pygame, unfortunately, can be tricky (though [not impossible](http://askubuntu.com/q/312767)) to install in virtual environments. If you are using `pip`, you might try `pip install hg+https://bitbucket.org/pygame/pygame`, or you could use your operating system's package manager. Windows users could use [Portable Python](http://portablepython.com/). PyPyBox2D and PyYAML are more forgiving, and should install just fine using `pip` or `easy_install`.
 
+To run one or more scripts in the simulator, use `run.py`, passing it the file names. 
+
+```bash
+
+$ python run.py assignment.py
+
+```
+
 ## Troubleshooting
 
 When running `python run.py <file>`, you may be presented with an error: `ImportError: No module named 'robot'`. This may be due to a conflict between sr.tools and sr.robot. To resolve, symlink simulator/sr/robot to the location of sr.tools.
@@ -54,25 +62,13 @@ On Ubuntu, this can be accomplished by:
 * Get the location. In my case this was `/usr/local/lib/python2.7/dist-packages`
 * Create symlink: `ln -s path/to/simulator/sr/robot /usr/local/lib/python2.7/dist-packages/sr/`
 
-## Exercise
------------------------------
-
-To run one or more scripts in the simulator, use `run.py`, passing it the file names. 
-
-I am proposing you three exercises, with an increasing level of difficulty.
-The instruction for the three exercises can be found inside the .py files (exercise1.py, exercise2.py, exercise3.py).
-
-When done, you can run the program with:
-
-```bash
-$ python run.py assignment.py
-```
-
-
 Robot API
 ---------
 
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
+
+Features
+---------
 
 ### Motors ###
 
@@ -84,8 +80,6 @@ The Motor Board API is identical to [that of the SR API](https://studentrobotics
 R.motors[0].m0.power = 25
 R.motors[0].m1.power = -25
 ```
-Features
----------
 
 ### The Grabber ###
 
@@ -123,6 +117,7 @@ Each `Marker` object has the following attributes:
 For example, the following code lists all of the markers the robot can see:
 
 ```python
+
 markers = R.see()
 print "I can see", len(markers), "markers:"
 
@@ -134,3 +129,5 @@ for m in markers:
 ```
 
 [sr-api]: https://studentrobotics.org/docs/programming/sr/
+
+
