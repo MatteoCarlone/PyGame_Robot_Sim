@@ -23,7 +23,7 @@ The project aims to make a holonomic robot move inside a maze without hitting wa
 
 #### Map 
 
-![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/sr/map.png)
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/map.png)
 
 The main difficulties I faced in this project were three:
 
@@ -129,5 +129,16 @@ for m in markers:
 ```
 
 [sr-api]: https://studentrobotics.org/docs/programming/sr/
+
+### Rotation ###
+
+A function called `Rotation ()` has been implemented to move the robot counterclockwise and to follow the maze without ever going back. 
+When the robot is close to the wall it calculates (using the `R.see ()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30 ° (between 75 ° and 105 ° for his right and between -105 ° and -75 ° for his left).
+
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpg)
+
+The Robot will rotate towards the furthest golden box until it no longer sees any golden box in a 90 ° cone at a distance of 1 in front of it.
+
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/finish_rot.jpg)
 
 
