@@ -53,7 +53,9 @@ $ python run.py assignment.py
 
 ```
 
-## Troubleshooting <img src="https://media2.giphy.com/media/KCdmz8COxVGcX7xpbh/giphy.gif?cid=ecf05e47h0zkw0ia3zhgi1v6rez699foch8z39mb8lgzwka6&rid=giphy.gif&ct=s" width="50"></h2>
+## Troubleshooting 
+-----------------------
+
 
 When running `python run.py <file>`, you may be presented with an error: `ImportError: No module named 'robot'`. This may be due to a conflict between sr.tools and sr.robot. To resolve, symlink simulator/sr/robot to the location of sr.tools.
 
