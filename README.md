@@ -53,7 +53,7 @@ $ python run.py assignment.py
 
 ```
 
-## Troubleshooting 
+Troubleshooting <img src="https://media0.giphy.com/media/ssm0SSwVbICGc/giphy.gif?cid=6c09b952305418f647c5754bccce27a04b88bd537f9e1735&rid=giphy.gif&ct=s" width="50"></h2>
 -----------------------
 
 
@@ -83,6 +83,34 @@ R.motors[0].m0.power = 25
 R.motors[0].m1.power = -25
 ```
 
+Two main functions have been designed to drive straight and to rotate the robot on its axis:
+
+* `drive(speed , seconds)` : This function gives the robot the ability of move straight for a certain time with with a defined speed.
+
+    `Arguments` : 
+
+    * 
+
+    *
+
+    `Returns` :
+
+    *
+
+
+* `turn(speed , seconds)` : This function gives the robot the ability to turn its self on its axis.
+    
+    `Arguments`
+
+    * 
+
+    *
+
+    `Returns`
+
+    *    
+
+
 ### The Grabber ###
 
 The robot is equipped with a grabber, capable of picking up a token which is in front of the robot and within 0.4 metres of the robot's centre. To pick up a token, call the `R.grab` method:
@@ -96,6 +124,18 @@ The `R.grab` function returns `True` if a token was successfully picked up, or `
 To drop the token, call the `R.release` method.
 
 Cable-tie flails are not implemented.
+
+A function has been created to clean the main of the code from the routine that the robot does when it has to grab a silver token.
+
+* `Routine()` : This function 
+    
+ 
+    `Returns`
+
+    *    
+
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif">
+
 
 ### Vision ###
 
@@ -130,16 +170,47 @@ for m in markers:
         print " - Arena marker {0} is {1} metres away".format( m.info.offset, m.dist )
 ```
 
-[sr-api]: https://studentrobotics.org/docs/programming/sr/
+Two main functions are designed to recognize the `Marker` object closest to the robot and whether it is gold or silver. 
+
+* `find_silver_token()` :
+
+    `Returns`
+
+    *  
+
+    *  
+
+* `find_golden_token()` :
+
+    `Returns`
+
+    *  
+
+    *  
+
 
 ### Rotation ###
 
-A function called `Rotation()` has been implemented to move the robot counterclockwise and to follow the maze without ever going back. 
+A function called `Rotation()` has been implemented to move the robot counter-clockwise and to follow the maze without ever going back. 
 When the robot is close to the wall it calculates (using the `R.see()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30 ° (between 75 ° and 105 ° for his right and between -105 ° and -75 ° for his left).
 
 <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpeg" width="649" height="355.5">
 
-The Robot will rotate towards the furthest golden box until it no longer sees any golden box in a 90 ° cone at a distance of 1 in front of it.
+The Robot will rotate towards the furthest golden box until it no longer sees any golden box in a 90° cone at a distance of 1 in front of it.
 
 <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/finish_rot.jpeg" width="649" height="355.5">
 
+The Rotation turns out to be:
+
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.gif" width="649" height="355.5">
+
+###  ###
+
+Results
+---------
+
+https://user-images.githubusercontent.com/81308076/138707707-600e8095-5c70-4a8d-97cd-6d168d9cfd0d.mp4
+
+
+
+[sr-api]: https://studentrobotics.org/docs/programming/sr/
