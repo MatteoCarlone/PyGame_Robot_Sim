@@ -53,7 +53,7 @@ $ python run.py assignment.py
 
 ```
 
-Troubleshooting <img src="https://media0.giphy.com/media/ssm0SSwVbICGc/giphy.gif?cid=6c09b952305418f647c5754bccce27a04b88bd537f9e1735&rid=giphy.gif&ct=s" width="50"></h2>
+Troubleshooting <img src="https://media0.giphy.com/media/3oFzlYuazAesniYNVe/giphy.gif?cid=ecf05e471tnvpnr5e4tdm3z3h65f3kboyrg4veeoi2ssj9ct&rid=giphy.gif&ct=s" width="50"></h2>
 -----------------------
 
 
@@ -89,26 +89,26 @@ Two main functions have been designed to drive straight and to rotate the robot 
 
     `Arguments` : 
 
-    * 
+    * speed (`int`) : the speed of the motors, that will be equal on each motor.
 
-    *
+    * seconds (`int`) : the time interval in which the robot will move straight.
 
     `Returns` :
 
-    *
+    *  `None` 
+           
 
 
 * `turn(speed , seconds)` : This function gives the robot the ability to turn its self on its axis.
     
-    `Arguments`
+    `Arguments` :
 
-    * 
+    * speed (`int`) : the speed of the motors, that will be positive on motor and negative in the other one, in order to make the rotation.
 
-    *
+    * seconds (`int`) : the time interval in which the robot will rotate.
+    `Returns` :
 
-    `Returns`
-
-    *    
+    *  `None`
 
 
 ### The Grabber ###
@@ -127,14 +127,15 @@ Cable-tie flails are not implemented.
 
 A function has been created to clean the main of the code from the routine that the robot does when it has to grab a silver token.
 
-* `Routine()` : This function 
+* `Routine()` : When the robot is close enough to a silver token (in particular at a distance of 0.4), thanks to this function, will grab the token (method: `R.grab()`), turn it self of 180° (function: `turn()`), it will drive straight for little (function: `drive()`), release the token (method: `R.release()`) and finally turn again of 180°.
     
- 
     `Returns`
 
-    *    
+    *   `None`  
 
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif">
+The Routine turns out to be: 
+
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif" width="398" height="298">
 
 
 ### Vision ###
@@ -172,31 +173,62 @@ for m in markers:
 
 Two main functions are designed to recognize the `Marker` object closest to the robot and whether it is gold or silver. 
 
-* `find_silver_token()` :
 
-    `Returns`
+* `find_golden_token()` : This function detects the golden box closest to the robot in a cone of 90° (between -45° and 45°) in a max distance of 0.8. The main purpose here is to have a threshold to stop the robot ad avoid walls.
 
-    *  
+    `Returns` : 
 
-    *  
+    *  `False` : if the robot doesn't detect golden boxes 
 
-* `find_golden_token()` :
+    *  `True` : if the robot detect golden boxes 
 
-    `Returns`
 
-    *  
+* `find_silver_token()` : This function detects the silver box closest to the robot in a 60 ° cone (between -30 ° and 30 °) at a maximum distance of 4. Furthermore, thanks to the `gold_in_between ()` function, the robot ignores the tokens silver behind the walls or that have obstacles that precede them. The main purpose here is to recognise tokens silver to approach.
 
-    *  
+    `Returns` :
+
+    *  dist (`Float`) : The distance of the closest silver token, `-1` if no silver tokens are detected or if they are preceded by obstacles (golden boxes).
+
+    *  rot_y (`Float`) : The angle in degrees between the robot and the silver token, `-1` if no silver tokens are detected or if they are preceded by obstacles (golden boxes).
+
+
+* `gold_in_between(dist, rot_y)` : This function is used inside `find_silver_token()` to check the presence or absence of golden boxes between the robot and the silver tokens it is looking for. 
+
+    `Arguments` :
+
+    * dist (`Float`) : The distance of the current silver token that the robot has seen.
+
+    * rot_y (`Float`) : The angle in degrees of the current silver token that the robot has seen.
+
+    `Returns` :
+
+    * `False` : if there aren't golden boxes between the robot and the current silver token that the robot has seen.
+
+
+    * `True` : if there's at least one golden box between the robot and the current silver token that the robot has seen.
 
 
 ### Rotation ###
 
 A function called `Rotation()` has been implemented to move the robot counter-clockwise and to follow the maze without ever going back. 
-When the robot is close to the wall it calculates (using the `R.see()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30 ° (between 75 ° and 105 ° for his right and between -105 ° and -75 ° for his left).
+
+* `Rotation()` : When the robot is close to the wall it calculates (using the `R.see()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30° (between 75° and 105° for his right and between -105° and -75° for his left). 
+
+    `Returns` :
+
+    * `None` 
 
 <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpeg" width="649" height="355.5">
 
-The Robot will rotate towards the furthest golden box until it no longer sees any golden box in a 90° cone at a distance of 1 in front of it.
+The Robot, using the function `angle_rotation()`, will rotate towards the furthest golden box until it no longer sees any golden box in a 90° cone at a distance of 1 in front of it. 
+
+* `angle_rotation()` : This function only detect if there are golden boxes in a cone a little bit larger then the one used in `find_golden_token()`
+
+    `Returns` :
+
+    * `False` : if the robot doesn't see any golden boxes
+
+    * `True` : if the robot sees at least one golden box
 
 <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/finish_rot.jpeg" width="649" height="355.5">
 
@@ -204,7 +236,6 @@ The Rotation turns out to be:
 
 <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.gif" width="649" height="355.5">
 
-###  ###
 
 Results
 ---------
