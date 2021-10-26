@@ -135,7 +135,8 @@ A function has been created to clean the main of the code from the routine that 
 
 The Routine turns out to be: 
 
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif" width="398" height="298">
+
+![ Grab](https://user-images.githubusercontent.com/81308076/138860110-fc8f8c08-ff1a-4f65-a0db-ea43e6dc7f98.gif)
 
 
 ### Vision ###
