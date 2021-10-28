@@ -135,7 +135,7 @@ A function has been created to clean the main of the code from the routine that 
 
 The Routine turns out to be: 
 
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif" width="398" height="298">
+![ Grab](https://user-images.githubusercontent.com/81308076/138860110-fc8f8c08-ff1a-4f65-a0db-ea43e6dc7f98.gif)
 
 
 ### Vision ###
@@ -236,11 +236,15 @@ The Rotation turns out to be:
 
 <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.gif" width="649" height="355.5">
 
+MAIN Function
+---------
+
+![FlowChart](https://user-images.githubusercontent.com/81308076/139292559-a076b5e5-06ac-4153-b2c1-8f0a6afffaa7.png)
 
 Results
 ---------
 
-https://user-images.githubusercontent.com/81308076/138707707-600e8095-5c70-4a8d-97cd-6d168d9cfd0d.mp4
+https://user-images.githubusercontent.com/81308076/139293325-9dfea8ab-4a7c-4481-aa39-1c1f78bff8f4.mp4
 
 
 
