@@ -23,7 +23,7 @@ The project aims to make a holonomic robot move inside a maze without hitting wa
 
 #### Map 
 
-![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/map.png) 
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/map.png" > 
 
 The main difficulties I faced in this project were three:
 
@@ -35,7 +35,7 @@ The main difficulties I faced in this project were three:
 
 The robot is able to do this thanks to two motors parallel to each other and the ability to see around itself and recognize in particular golden boxes and silver tokens. Its vision can also be limited to see only in some directions rather than others at different distances.
 
-This project helped me to improve my knowledge of python especially in managing and creating multiple functions at the same time. It was also a first approach to the world of robotics in preparation for the study and use of ROS (Robot-Operating-Systems) which  is a set of software libraries and tools that help build robot applications.
+This project helped me to improve my knowledge of python especially in managing and creating multiple functions at the same time. It was also a first approach to the world of robotics in preparation for the study and use of [**ROS**](http://wiki.ros.org) (Robot-Operating-Systems) which is a set of software libraries and tools that help build robot applications.
 
 
 Installing and running <img src="https://media3.giphy.com/media/LwBuVHh34nnCPWRSzB/giphy.gif?cid=ecf05e47t4j9mb7l8j1vzdc76i2453rexlnv7iye9d4wfdep&rid=giphy.gif&ct=s" width="50"></h2>
@@ -69,10 +69,12 @@ Robot API
 
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
 
-Features
----------
+---
 
-### Motors ###
+<h1 align = "center"> Features </h1>
+
+
+## Motors ##
 
 The simulated robot has two motors configured for skid steering, connected to a two-output [Motor Board](https://studentrobotics.org/docs/kit/motor_board). The left motor is connected to output `0` and the right motor to output `1`.
 
@@ -117,7 +119,7 @@ Two main functions have been designed to drive straight and to rotate the robot 
     This function has no `Returns` .
     
     
-### The Grabber ###
+## The Grabber ##
 
 The robot is equipped with a grabber, capable of picking up a token which is in front of the robot and within 0.4 metres of the robot's centre. To pick up a token, call the `R.grab` method:
 
@@ -145,16 +147,15 @@ A function has been created to clean the main function of the code from the rout
     drive(-20,0.9)
     turn(-20,3)
 ```
- 
-The Routine turns out to be: 
+<h5>The Routine turns out to be: </h5>
 
 <p align="center">
     
-    <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif" width="398" height="298">
-
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/%20Grab.gif" width="398" height="298">
+    
 </p>
 
-### Vision ###
+## Vision ##
 
 To help the robot find tokens and navigate, each token has markers stuck to it, as does each wall. The `R.see` method returns a list of all the markers the robot can see, as `Marker` objects. The robot can only see markers which it is facing towards.
 
@@ -218,9 +219,9 @@ Two main functions are designed to recognize the `Marker` object closest to the 
 
     `Arguments` :
 
-    * dist (`Float`) : The distance of the current silver token that the robot has seen.
+    * dist : The distance of the current silver token that the robot has seen.
 
-    * rot_y (`Float`) : The angle in degrees of the current silver token that the robot has seen.
+    * rot_y : The angle in degrees of the current silver token that the robot has seen.
 
     `Returns` :
 
@@ -230,7 +231,7 @@ Two main functions are designed to recognize the `Marker` object closest to the 
     * `True` : if there's at least one golden box between the robot and the current silver token that the robot has seen.
 
 
-### Rotation ###
+## Rotation ##
 
 A function called `Rotation()` has been implemented to move the robot counter-clockwise and to follow the maze without ever going back. 
 
@@ -254,7 +255,7 @@ The angle and the distance fo the cone are settable by passing the arguments to 
     
 </p>
 
-The Rotation turns out to be:
+<h5> The Rotation turns out to be: </h5>
 
 <p align="center">
     
@@ -276,6 +277,16 @@ I thought the results of the code and therefore of the project would be well rep
 
 https://user-images.githubusercontent.com/81308076/139293325-9dfea8ab-4a7c-4481-aa39-1c1f78bff8f4.mp4
 
+Possible improvements
+------
+
+The greatest difficulty of this assignment is sure that there are many ways to satisfy the professor request. During the coding, in fact, I implemented many functions ( still visible in the history of this project ) only because I had more than one idea of how the robot could move inside the arena.
+
+The code is now clean and short but also the way the robot moves in the environment is simple, its way of turning and detecting the silver tokens could be made more complex but smarter with some improvements:
+
+1. __Online Control__ : The idea is to never stop detecting the silver tokens knowing that the robot will ignore gold boxes, a remnant of this idea lies in the gold_in_between () function, which in the final version of the project turns out to be an all too precise control. The result of this method is that the robot will not move around the arena giving priority to the golden boxes but its real target, the silver tokens. Furthermore, thanks to the control on possible obstacles in front of the tokens, the robot could have a very wide view to detect them. As I have already mentioned, I tried to implement this method with good results, the robot detected silver tokens in a 300 ° cone also seeing behind it (not completely to avoid approaching tokens already grabbed). Unfortunately, in some cases, the robot detected silver tokens already approached and I decided to stop this implementation. However, This failure brought to me another possible improvement that I've never tried yet.
+
+2. __Already Grabbed Token__ : I'm not sure if this improvement is feasible but I think the `code` attribute of the` MarkerInfo` objects (described in the **vision feature**) could be very useful to ignore the silver tokens that the robot has already grabbed by saving their code. This idea added to the **Online Control** will let the robot have a 360° view without ever going back.
 
 
 [sr-api]: https://studentrobotics.org/docs/programming/sr/
