@@ -23,7 +23,7 @@ The project aims to make a holonomic robot move inside a maze without hitting wa
 
 #### Map 
 
-![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/map.png)
+![alt text](https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/map.png) 
 
 The main difficulties I faced in this project were three:
 
@@ -85,32 +85,38 @@ R.motors[0].m1.power = -25
 
 Two main functions have been designed to drive straight and to rotate the robot on its axis:
 
-* `drive(speed , seconds)` : This function gives the robot the ability of move straight for a certain time with with a defined speed.
+* `drive(speed , seconds)` : This function gives the robot the ability of move straight for a certain time with a defined speed.
 
     `Arguments` : 
 
-    * speed (`int`) : the speed of the motors, that will be equal on each motor.
+    * speed : the speed of the motors, that will be equal on each motor in order to move straight.
 
-    * seconds (`int`) : the time interval in which the robot will move straight.
+    * seconds : the time interval in which the robot will move straight.
 
-    `Returns` :
-
-    *  `None` 
-           
+    This function has no `Returns` .
 
 
-* `turn(speed , seconds)` : This function gives the robot the ability to turn its self on its axis.
+* `turn(speed , seconds)` : This function gives the robot the ability to turn on its axis.
     
     `Arguments` :
 
-    * speed (`int`) : the speed of the motors, that will be positive on motor and negative in the other one, in order to make the rotation.
+    * speed : the speed of the motors, that will be positive for one and negative for the other in order to make the rotation.
 
-    * seconds (`int`) : the time interval in which the robot will rotate.
-    `Returns` :
+    * seconds : the time interval in which the robot will rotate.
+    
+    This function has no `Returns` .
+    
+* `Silver_Approach(dist, rot_y)` : This function has been implemented to get closer to the silver token when the robot detects one with its particular visual perception, a feature that I will describe later. At first, the robot checks if it is in the right direction to reach the silver token and if not, it will adapt itself turning left and right. Second, it will call the Routine() function to complete its purpose, take the silver token it saw.
 
-    *  `None`
-
-
+    `Arguments` :
+    
+    * dist : The distance of the silver token that the robot has detected.
+    
+    * rot_y : the angle in dregrees of the silver token that the robot has detected 
+    
+    This function has no `Returns` .
+    
+    
 ### The Grabber ###
 
 The robot is equipped with a grabber, capable of picking up a token which is in front of the robot and within 0.4 metres of the robot's centre. To pick up a token, call the `R.grab` method:
@@ -125,18 +131,28 @@ To drop the token, call the `R.release` method.
 
 Cable-tie flails are not implemented.
 
-A function has been created to clean the main of the code from the routine that the robot does when it has to grab a silver token.
+A function has been created to clean the main function of the code from the routine that the robot does when it has to grab a silver token.
 
-* `Routine()` : When the robot is close enough to a silver token (in particular at a distance of 0.4), thanks to this function, will grab the token (method: `R.grab()`), turn it self of 180° (function: `turn()`), it will drive straight for little (function: `drive()`), release the token (method: `R.release()`) and finally turn again of 180°.
+* `Routine()` : When the robot is close enough to a silver token (in particular at a distance of 0.4), thanks to this function, it will grab the token (method: `R.grab ()`), it will turn 180 ° ( function: `turn ()`), will release the token (method: `R.release ()`), go back for a while (function: `drive ()`) and finally turn 180 ° again to continue the ride in the maze.
     
-    `Returns`
-
-    *   `None`  
-
+    This function has no `Returns` .
+    
+```python
+    R.grab()
+    print("Gotcha!!")
+    turn(20,3)
+    R.release()
+    drive(-20,0.9)
+    turn(-20,3)
+```
+ 
 The Routine turns out to be: 
 
-![ Grab](https://user-images.githubusercontent.com/81308076/138860110-fc8f8c08-ff1a-4f65-a0db-ea43e6dc7f98.gif)
+<p align="center">
+    
+    <img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif" width="398" height="298">
 
+</p>
 
 ### Vision ###
 
@@ -174,8 +190,14 @@ for m in markers:
 Two main functions are designed to recognize the `Marker` object closest to the robot and whether it is gold or silver. 
 
 
-* `find_golden_token()` : This function detects the golden box closest to the robot in a cone of 90° (between -45° and 45°) in a max distance of 0.8. The main purpose here is to have a threshold to stop the robot ad avoid walls.
-
+* `find_golden_token(distance=0.8, angle=45°)` : This function detects the closest golden box to the robot in a cone wich by default is 90° (between -45° and 45°) in a maximum distance of 0.8. The main purpose here is to have a threshold to stop the robot ad avoid walls.
+    
+    `Arguments` :
+    
+    *  distance = the settable distance of the cone in which the robot can detect golden boxes (by default 0.8).
+    
+    *  angle = the settable angle in degrees of the cone in which the robot can detect golden boxes (by default 45°)
+    
     `Returns` : 
 
     *  `False` : if the robot doesn't detect golden boxes 
@@ -183,13 +205,13 @@ Two main functions are designed to recognize the `Marker` object closest to the 
     *  `True` : if the robot detect golden boxes 
 
 
-* `find_silver_token()` : This function detects the silver box closest to the robot in a 60 ° cone (between -30 ° and 30 °) at a maximum distance of 4. Furthermore, thanks to the `gold_in_between ()` function, the robot ignores the tokens silver behind the walls or that have obstacles that precede them. The main purpose here is to recognise tokens silver to approach.
+* `find_silver_token()` : This function detects the closest silver token to the robot in a 40° cone (between -20 ° and 20°) at a maximum distance of 4. Furthermore, thanks to the `gold_in_between()` function, the robot ignores the tokens silver behind the walls or that have obstacles that precede them. The main purpose here is to recognise tokens silver to approach.
 
     `Returns` :
 
-    *  dist (`Float`) : The distance of the closest silver token, `-1` if no silver tokens are detected or if they are preceded by obstacles (golden boxes).
+    *  dist : The distance of the closest silver token, `-1` if no silver tokens are detected or if they are preceded by obstacles (golden boxes).
 
-    *  rot_y (`Float`) : The angle in degrees between the robot and the silver token, `-1` if no silver tokens are detected or if they are preceded by obstacles (golden boxes).
+    *  rot_y : The angle in degrees between the robot and the silver token, `-1` if no silver tokens are detected or if they are preceded by obstacles (golden boxes).
 
 
 * `gold_in_between(dist, rot_y)` : This function is used inside `find_silver_token()` to check the presence or absence of golden boxes between the robot and the silver tokens it is looking for. 
@@ -212,37 +234,45 @@ Two main functions are designed to recognize the `Marker` object closest to the 
 
 A function called `Rotation()` has been implemented to move the robot counter-clockwise and to follow the maze without ever going back. 
 
-* `Rotation()` : When the robot is close to the wall it calculates (using the `R.see()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30° (between 75° and 105° for his right and between -105° and -75° for his left). 
+* `Rotation()` : When the robot is close to the wall it calculates (using the `R.see()` method) the distance between it and the nearest golden box, respectively, to its right and left, each at an angle of 30° (between 75° and 105° for its right and between -105° and -75° for its left). 
 
-    `Returns` :
+    This function has no `Returns` .
 
-    * `None` 
+<p align="center">
+    
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpeg" width="486.75" height="266.625">
+    
+</p>
 
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.jpeg" width="649" height="355.5">
+The Robot will rotate towards the furthest golden box until it no longer sees any golden box in a 91° cone at a distance of 1 in front of it. 
 
-The Robot, using the function `angle_rotation()`, will rotate towards the furthest golden box until it no longer sees any golden box in a 90° cone at a distance of 1 in front of it. 
-
-* `angle_rotation()` : This function only detect if there are golden boxes in a cone a little bit larger then the one used in `find_golden_token()`
-
-    `Returns` :
-
-    * `False` : if the robot doesn't see any golden boxes
-
-    * `True` : if the robot sees at least one golden box
-
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/finish_rot.jpeg" width="649" height="355.5">
+The angle and the distance fo the cone are settable by passing the arguments to the function `find_golden_token(distance = ... , angle = ...)` .
+    
+<p align="center">
+    
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/finish_rot.jpeg" width="486.75" height="266.625">
+    
+</p>
 
 The Rotation turns out to be:
 
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.gif" width="649" height="355.5">
+<p align="center">
+    
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/rotation.gif" width="486.75" height="266.625">
+    
+</p>
 
 MAIN Function
 ---------
+
+Before start coding it was very useful to create a Flowchart to have clear ideas on the main actions that the robot has to do in its path inside the maze.
 
 ![FlowChart](https://user-images.githubusercontent.com/81308076/139292559-a076b5e5-06ac-4153-b2c1-8f0a6afffaa7.png)
 
 Results
 ---------
+
+I thought the results of the code and therefore of the project would be well represented with a video that shows the behaviour of the robot during the first lap of the track.
 
 https://user-images.githubusercontent.com/81308076/139293325-9dfea8ab-4a7c-4481-aa39-1c1f78bff8f4.mp4
 
