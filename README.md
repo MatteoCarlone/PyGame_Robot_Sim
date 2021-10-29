@@ -277,7 +277,7 @@ I thought the results of the code and therefore of the project would be well rep
 
 https://user-images.githubusercontent.com/81308076/139293325-9dfea8ab-4a7c-4481-aa39-1c1f78bff8f4.mp4
 
-Possible improvements
+Possible improvements ![ezgif-4-0c80dd65ae1b](https://user-images.githubusercontent.com/81308076/139424213-cf5eea84-d903-4c21-bd66-cc046236b222.gif)
 ------
 
 The greatest difficulty of this assignment is sure that there are many ways to satisfy the professor request. During the coding, in fact, I implemented many functions ( still visible in the history of this project ) only because I had more than one idea of how the robot could move inside the arena.
