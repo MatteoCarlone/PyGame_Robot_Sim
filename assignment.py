@@ -15,7 +15,7 @@ def drive(speed , seconds):
 	
 	Arguments:
 	
-		speed = speed of the motors, that will be equal on each motor
+		speed = speed of the motors, that will be equal on each motor to move straight
 		
 		seconds = time interval in which the robot will move straight 
 		
