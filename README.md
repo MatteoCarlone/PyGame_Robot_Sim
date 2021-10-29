@@ -1,7 +1,7 @@
 
 # Python Robotics Simulator  <img src="https://media4.giphy.com/media/dWlLf9EAC8u5Nd0ku4/giphy.gif?cid=ecf05e479junsdcbh0eayqrrx90l4oo4lj83zpqi9yrught2&rid=giphy.gif&ct=s" width="50"></h2>
 ## First Assignment of the course [Research_Track_1](https://unige.it/en/off.f/2021/ins/51201.html?codcla=10635) , [Robotics Engineering](https://courses.unige.it/10635). 
-###  Professor. [Carmine Ricchiuto](https://github.com/CarmineD8).
+###  Professor. [Carmine Recchiuto](https://github.com/CarmineD8).
 
 -----------------------
 
