@@ -1,11 +1,22 @@
 
+##################################################################### FIRST ASSIGNMENT RESEARCH TRACK #######################################################################
+
+
+################################# IMPORTING LIBRARIES #################################
+
+
 from __future__ import print_function
 import time
 from sr.robot import *
 
-R = Robot() # Initializing a Robot object
 
-##############################
+#########################################
+
+
+R = Robot()    # Initializing a Robot object.
+
+
+################################# DEFINING FUNCTIONS #################################
 
 def drive(speed , seconds):
 
@@ -29,7 +40,7 @@ def drive(speed , seconds):
 	R.motors[0].m0.power = 0
 	R.motors[0].m1.power = 0
 	
-##############################
+#########################################
 
 def turn(speed , seconds):
 
@@ -52,12 +63,12 @@ def turn(speed , seconds):
 	R.motors[0].m0.power =0
 	R.motors[0].m1.power =0
 	
-##############################
+#########################################
 
-def find_golden_token(distance=0.8, angle=45):
+def find_golden_token(distance=0.9, angle=45):
 
 	'''
-	Function to detect the closest golden box to the robot in a cone which by default is 90 degrees (between -45 and 45 degrees) in a maximum distance of 0.8.
+	Function to detect the closest golden box to the robot in a cone which by default is 90 degrees (between -45 and 45 degrees) in a maximum distance of 0.9.
 	The main purpose here is to have a threshold to stop the robot and avoid walls.
 	
 	Arguments:
@@ -92,12 +103,12 @@ def find_golden_token(distance=0.8, angle=45):
 		
 		return True 
 		
-#############################
+#########################################
 
 def find_silver_token():
 
 	'''
-	Function to detect the closest silver token to the robot in a cone in 40 degrees (between -20 and 20 degrees) at a maximum distance of 4. 
+	Function to detect the closest silver token to the robot in a cone in 140 degrees (between -70 and 70 degrees) at a maximum distance of 1.2. 
 	
 	Furthermore, thanks to the gold_in_between() function, the robot ignores the tokens silver behind the walls or that have obstacles that precede them.
 	
@@ -111,11 +122,11 @@ def find_silver_token():
 	
 	'''
 	
-	dist = 4
+	dist = 1.2
 	
 	for token in R.see():
 	
-		if -20 < token.rot_y < 20:
+		if -70 < token.rot_y < 70:
 		
 			if token.info.marker_type is MARKER_TOKEN_SILVER and token.dist < dist:
 			
@@ -128,7 +139,7 @@ def find_silver_token():
 					dist = token.dist 
 					
 					rot_y = token.rot_y
-	if dist == 4:
+	if dist == 1.2:
 	
 		return -1, -1
 		
@@ -136,7 +147,7 @@ def find_silver_token():
 		
 		return dist, rot_y
 
-#############################
+#########################################
 
 def gold_in_between(dist, rot_y):
 	
@@ -168,7 +179,7 @@ def gold_in_between(dist, rot_y):
 			
 	return False
 	
-#############################
+#########################################
 
 def Silver_Approach(dist, rot_y):
 
@@ -205,7 +216,7 @@ def Silver_Approach(dist, rot_y):
 		
 	Routine()
 	
-#############################
+#########################################
 
 def Routine():
 
@@ -234,7 +245,7 @@ def Routine():
 		drive(-20,0.9)
 		turn(-20,3)
 
-#############################
+#########################################
 
 def Rotation():
 
@@ -284,39 +295,56 @@ def Rotation():
 			turn(-10,0.1)
 		
 	
-		
 			
-###########################
+################################# MAIN FUNCTION #################################
+
 
 def main():
 
-	while(1):   #Infinite cycle to run the robot endlessly 
+	'''
+	The idea is to have an infinite loop to make the robot work continuously:
+
+	* The First step is to look for the gold boxes, the robot behavior will be different if it is close to a gold box or to a silver token.
+
+	* Second step, check if a silver token is in the robot's field of vision or not.
+
+	* the Third step dependes by the second one:
+
+		* If the robot see a silver token, it will approach it in order to grab it. This control is made with the statement " if rot_y != -1 " because find_silver_token()
+		  returns -1 if no silver token are detected.
+
+		* If the robot doesn't see a silver token, it will drive straight ahead.
+
+	* Fourth step, strictly related to the First, if the robot is close to a golden box, it will call the Rotation() function to turn counter-clockwise with respect to the path.
+
+	'''
+
+	while(1):   # Infinite cycle to run the Robot endlessly 
 	
-		if find_golden_token() == False: 
+		if find_golden_token() == False:     # No Golden Boxes are detected , First Step.
 		
-			# No golden boxes are detected 
 		
-			dist, rot_y = find_silver_token() # Detecting Silver Tokens
+			dist, rot_y = find_silver_token() 	# Detecting Silver Tokens, Second Step.
 			
-			if rot_y != -1:
+			if rot_y != -1:    #  Third Step. 
 			
-				# Silver token found 
+				# Silver token found. 
 			
-				Silver_Approach(dist , rot_y) # Approaching the silver token
+				Silver_Approach(dist , rot_y) 	# Approaching the Silver Token.
 				
 			else:
 				
-				# Silver token not found 
+				# Silver Token not found 
 				
-				drive(75,0.1) 
+				drive(75,0.1)  # Drive straight ahead.
 				
 		else:
 		
-			# The Robot is close to a wall (golden boxes)
+			# The Robot is close to a wall (Golden Boxes).
 		
-			Rotation() # The robot rotate counter-clockwise
+			Rotation() # Rotate counter-clockwise
 
-###########################
+#########################################
 
 main()
 		
