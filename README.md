@@ -151,7 +151,7 @@ A function has been created to clean the main function of the code from the rout
 
 <p align="center">
     
-<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/%20Grab.gif" width="398" height="298">
+<img src="https://github.com/MatteoCarlone/my_Research_Track/blob/main/images/Grab.gif" width="400" height="225.3">
     
 </p>
 
