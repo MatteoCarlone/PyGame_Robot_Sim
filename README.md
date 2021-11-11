@@ -191,7 +191,7 @@ for m in markers:
 Two main functions are designed to recognize the `Marker` object closest to the robot and whether it is gold or silver. 
 
 
-* `find_golden_token(distance=0.8, angle=45°)` : This function detects the closest golden box to the robot in a cone wich by default is 90° (between -45° and 45°) in a maximum distance of 0.8. The main purpose here is to have a threshold to stop the robot ad avoid walls.
+* `find_golden_token(distance=0.9, angle=45°)` : This function detects the closest golden box to the robot in a cone wich by default is 90° (between -45° and 45°) in a maximum distance of 0.9. The main purpose here is to have a threshold to stop the robot ad avoid walls.
     
     `Arguments` :
     
@@ -206,7 +206,7 @@ Two main functions are designed to recognize the `Marker` object closest to the 
     *  `True` : if the robot detect golden boxes 
 
 
-* `find_silver_token()` : This function detects the closest silver token to the robot in a 40° cone (between -20 ° and 20°) at a maximum distance of 4. Furthermore, thanks to the `gold_in_between()` function, the robot ignores the tokens silver behind the walls or that have obstacles that precede them. The main purpose here is to recognise tokens silver to approach.
+* `find_silver_token()` : This function detects the closest silver token to the robot in a 140° cone (between -70 ° and 70°) at a maximum distance of 1.2. Furthermore, thanks to the `gold_in_between()` function, the robot ignores the tokens silver behind the walls or that have obstacles that precede them. The main purpose here is to recognise tokens silver to approach.
 
     `Returns` :
 
@@ -269,6 +269,21 @@ MAIN Function
 Before start coding it was very useful to create a Flowchart to have clear ideas on the main actions that the robot has to do in its path inside the maze.
 
 ![FlowChart](https://user-images.githubusercontent.com/81308076/139292559-a076b5e5-06ac-4153-b2c1-8f0a6afffaa7.png)
+
+The idea of the `main()` function is to have an infinite loop to make the robot work continuously:
+
+* The First step is to look for the gold boxes, the robot behavior will be different if it is close to a gold box or to a silver token.
+    
+* Second step, check if a silver token is in the robot's field of vision or not.
+    
+* the Third step dependes by the second one:
+    
+	* If the robot see a silver token, it will approach it in order to grab it. This control is made with the statement " if rot_y != -1 " because find_silver_token() returns -1 if no silver token are detected.
+		
+	* If the robot doesn't see a silver token, it will drive straight ahead.
+		
+* Fourth step, strictly related to the First, if the robot is close to a golden box, it will call the Rotation() function to turn counter-clockwise with respect to the path.
+
 
 Results
 ---------
