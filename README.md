@@ -295,7 +295,7 @@ https://user-images.githubusercontent.com/81308076/139293325-9dfea8ab-4a7c-4481-
 Possible improvements ![ezgif-4-0c80dd65ae1b](https://user-images.githubusercontent.com/81308076/139424213-cf5eea84-d903-4c21-bd66-cc046236b222.gif)
 ------
 
-The greatest difficulty of this assignment was surely that there are many ways to satisfy the professor request. During the coding, in fact, I implemented many functions ( still visible in the history of this project ) only because I had more than one idea of how the robot could move inside the arena.
+The greatest difficulty of this assignment was surely that there are many ways to satisfy the professor request. During the coding, in fact, I implemented many functions ( still visible in the history of this project ) just because I had more than one idea of how the robot could move inside the arena.
 
 The code is now clean and short but also the way the robot moves in the environment is simple, its way of turning and detecting the silver tokens could be made more complex but smarter with some improvements:
 
