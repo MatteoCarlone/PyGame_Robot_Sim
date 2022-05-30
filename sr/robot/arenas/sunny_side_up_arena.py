@@ -1,5 +1,7 @@
 from __future__ import division
 
+
+
 import pygame
 from math import pi
 from random import random
@@ -7,7 +9,7 @@ from random import random
 from .arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH
 
 from ..markers import Token
-from ..vision import MARKER_TOKEN_GOLD, MARKER_TOKEN_SILVER
+from ..vision import create_marker_info_by_type, MARKER_TOKEN_GOLD, MARKER_TOKEN_SILVER
 
 class GoldToken(Token):
     def __init__(self, arena, marker_number):
@@ -151,39 +153,46 @@ class SunnySideUpArena(Arena):
             count+1
             
         token=SilverToken(self,count)
-        token.location = (-8, 0)
+        token.location = (-8.5, 2.5)
         self.objects.append(token) 
-        count+1
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 1) 
+        count = count+1
         
         token=SilverToken(self,count)
-        token.location = (-6, 3.75)
+        token.location = (-6.5, 3.75)
         self.objects.append(token) 
-        count+1
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 2) 
+        count = count+1
         
         token=SilverToken(self,count)
-        token.location = (-2.5, 1.25)
-        self.objects.append(token) 
-        count+1
+        token.location = (-2, 2.5)
+        self.objects.append(token)
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 3) 
+        count = count+1
         
         token=SilverToken(self,count)
-        token.location = (1.5, -0.25)
-        self.objects.append(token) 
-        count+1
+        token.location = (2.5, -0.75)
+        self.objects.append(token)
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 4) 
+        count = count+1
         
         token=SilverToken(self,count)
-        token.location = (6, 3.75)
-        self.objects.append(token) 
-        count+1
+        token.location = (4, 4.25)
+        self.objects.append(token)
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 5) 
+        count = count+1
         
         token=SilverToken(self,count)
-        token.location = (8, 0.0)
+        token.location = (8.5, -4.25)
         self.objects.append(token) 
-        count+1
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 6) 
+        count = count+1
         
         token=SilverToken(self,count)
-        token.location = (-4.0, -4.0)
-        self.objects.append(token) 
-        count+1
+        token.location = (-4, -4.25)
+        self.objects.append(token)
+        token.marker_info = create_marker_info_by_type(MARKER_TOKEN_SILVER, 7) 
+        count = count+1
         
 
     def draw_background(self, surface, display):

@@ -7,7 +7,9 @@
 
 from __future__ import print_function
 import time
+import math
 from sr.robot import *
+import Stats
 
 
 #########################################
@@ -15,6 +17,9 @@ from sr.robot import *
 
 R = Robot()    # Initializing a Robot object.
 
+Grab = False
+
+pre_pointed = 0
 
 ################################# DEFINING FUNCTIONS #################################
 
@@ -65,7 +70,7 @@ def turn(speed , seconds):
 	
 #########################################
 
-def find_golden_token(distance=0.9, angle=45):
+def find_golden_token(distance=0.9, angle=40):
 
 	'''
 	Function to detect the closest golden box to the robot in a cone which by default is 90 degrees (between -45 and 45 degrees) in a maximum distance of 0.9.
@@ -88,7 +93,7 @@ def find_golden_token(distance=0.9, angle=45):
 	dist = distance
 
 	for token in R.see():
-		
+        
 		if token.dist < dist and token.info.marker_type is MARKER_TOKEN_GOLD and -angle < token.rot_y < angle:
 			
 			dist = token.dist
@@ -121,7 +126,8 @@ def find_silver_token():
 		rot_y = the angle in degrees between the robot and the silver token, -1 if no silver tokens are detected or if they are preceded by obstacles (golden boxes)
 	
 	'''
-	
+	global pre_pointed
+	pointed = 0
 	dist = 1.2
 	
 	for token in R.see():
@@ -135,17 +141,21 @@ def find_silver_token():
 					print("Looking for a new Silver!!")
 					
 				else:
+					print("Code:  ", token.info.code)
+					print("offset:  ", token.info.offset)
 					
+					pointed = token.info.offset
+					Stats.Wrong_Direction(pointed, pre_pointed)
+					pointed = token.info.offset
 					dist = token.dist 
-					
 					rot_y = token.rot_y
 	if dist == 1.2:
 	
-		return -1, -1
+		return -1, -1, -1
 		
 	else:
 		
-		return dist, rot_y
+		return dist, rot_y , pointed
 
 #########################################
 
@@ -212,7 +222,7 @@ def Silver_Approach(dist, rot_y):
 			
 			print("right a bit!!")
 			
-		dist , rot_y = find_silver_token()
+		dist , rot_y , pointed = find_silver_token()
 		
 	Routine()
 	
@@ -227,23 +237,30 @@ def Routine():
 	This function has no return
 	
 	'''
+    
+	global Grab, pre_pointed    
+  
 
 	d_th = 0.4
 	
-	dist , rot_y = find_silver_token()
+	dist , rot_y , pointed = find_silver_token()
 	
 	if dist > d_th or dist == -1:
 	
 		drive(75,0.1)
 	
 	else:
-	
-		R.grab()
+		
+		
+		Grab = R.grab()       
 		print("Gotta catch'em all!!")
 		turn(20,3)
 		R.release()
 		drive(-20,0.9)
 		turn(-20,3)
+		pre_pointed = pointed
+		pointed = 0
+
 
 #########################################
 
@@ -284,7 +301,7 @@ def Rotation():
 	
 		while find_golden_token(1,45.5):
 		
-			turn(10,0.1)
+			turn(10,0.1) #50 , 1.2 in order to test sbagliato giro
 			
 		
 			
@@ -300,6 +317,8 @@ def Rotation():
 
 
 def main():
+    
+    
 
 	'''
 	The idea is to have an infinite loop to make the robot work continuously:
@@ -318,13 +337,33 @@ def main():
 	* Fourth step, strictly related to the First, if the robot is close to a golden box, it will call the Rotation() function to turn counter-clockwise with respect to the path.
 
 	'''
+    
+	global Grab
+    
+	rate = 0
 
 	while(1):   # Infinite cycle to run the Robot endlessly 
-	
+		Stats.Lap_Counter(Grab) 
+#		if(rate%10 == 0):  
+			#print('+++++++++++++++++++++++')      
+		Stats.Goal_Distances_left(R.see())
+		Stats.Goal_Distances_right(R.see())
+        
+		Grab = False
+        
+		markers = R.see()
+		#print("I can see", len(markers), "markers:")
+		#for m in markers:
+			#if(m.info.marker_type in (MARKER_TOKEN_GOLD, MARKER_TOKEN_SILVER)):	
+				#print(" - Token {0} is {1} metres away".format( m.info.offset, m.dist ))
+				
+			#elif(m.info.marker_type == MARKER_ARENA):
+				#print(" - Arena marker {0} is {1} metres away".format( m.info.offset, m.dist ))
+			
 		if find_golden_token() == False:     # No Golden Boxes are detected , First Step.
 		
 		
-			dist, rot_y = find_silver_token() 	# Detecting Silver Tokens, Second Step.
+			dist, rot_y, pointed = find_silver_token() 	# Detecting Silver Tokens, Second Step.
 			
 			if rot_y != -1:    #  Third Step. 
 			
@@ -343,6 +382,8 @@ def main():
 			# The Robot is close to a wall (Golden Boxes).
 		
 			Rotation() # Rotate counter-clockwise
+            
+		rate  = rate + 1
 
 #########################################
 
